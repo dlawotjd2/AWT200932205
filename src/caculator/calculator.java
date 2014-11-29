@@ -211,7 +211,13 @@ public class calculator extends Frame{
 				prvNum = tf.getText();
 				tf.setText(null);
 				prvAction = "/";
-			} else if (action.equals("=")){
+			} else if (action.equals("<-")){
+				String a = tf.getText();
+				a = a.substring(0, a.length() == 0 ? 0 : a.length()-1);
+				tf.setText(a);
+			}
+			
+			else if (action.equals("=")){
 				double result = Double.parseDouble(tf.getText());
 				
 				if (prvAction.equals("+"))
