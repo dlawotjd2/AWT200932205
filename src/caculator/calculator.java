@@ -19,6 +19,7 @@ public class calculator extends Frame{
 	TextField tf = new TextField();
 	String prvNum = new String();
 	String prvAction = null;
+	boolean bReset = false;
 	public calculator(){
 		
 		addWindowListener(new WindowAdapter(){
@@ -170,70 +171,81 @@ public class calculator extends Frame{
 			// TODO Auto-generated method stub
 			String action = arg0.getActionCommand();
 			
-			if (action.equals("C")){
+			switch (action){
+			case "C":
 				prvNum = null;
 				tf.setText(null);
-			} else if (action.equals("1")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("2")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("3")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("4")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("5")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("6")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("7")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("8")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("9")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("0")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("1")){
-				tf.setText(tf.getText().toString() + action);
-			} else if (action.equals("+")){
+				break;
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+			case "5":
+			case "6":
+			case "7":
+			case "8":
+			case "9":
+			case "0":
+			case ".":
+				tf.setText(bReset ? action : tf.getText().toString() + action);
+				bReset = false;
+				break;
+			case "+":
 				prvNum = tf.getText();
 				tf.setText(null);
 				prvAction = "+";
-			} else if (action.equals("-")){
+				break;
+			case "-":
 				prvNum = tf.getText();
 				tf.setText(null);
 				prvAction = "-";
-			} else if (action.equals("*")){
+				break;
+			case "*":
 				prvNum = tf.getText();
 				tf.setText(null);
 				prvAction = "*";
-			} else if (action.equals("/")){
+				break;
+			case "/":
 				prvNum = tf.getText();
 				tf.setText(null);
 				prvAction = "/";
-			} else if (action.equals("<-")){
+				break;
+			case "<-":
 				String a = tf.getText();
 				a = a.substring(0, a.length() == 0 ? 0 : a.length()-1);
 				tf.setText(a);
-			}
-			
-			else if (action.equals("=")){
-				double result = Double.parseDouble(tf.getText());
-				
-				if (prvAction.equals("+"))
-					result += Double.parseDouble(prvNum);
-				if (prvAction.equals("-"))
-					result -= Double.parseDouble(prvNum);
-				if (prvAction.equals("*"))
-					result *= Double.parseDouble(prvNum);
-				if (prvAction.equals("/"))
-					result = Double.parseDouble(prvNum) / result;
+				break;
+			case "Route":
+				prvNum = tf.getText();
+				double result = Math.sqrt(Double.parseDouble(prvNum)); 
 				
 				if (result - (int) result == 0.0)
 					tf.setText(""+(int) result);
 				else
 					tf.setText(""+result);
-			} 
+				
+				bReset = true;
+				break;
+			case "=":
+				double result1 = Double.parseDouble(tf.getText());
+				
+				if (prvAction.equals("+"))
+					result1 += Double.parseDouble(prvNum);
+				else if (prvAction.equals("-"))
+					result1 -= Double.parseDouble(prvNum);
+				else if (prvAction.equals("*"))
+					result1 *= Double.parseDouble(prvNum);
+				else if (prvAction.equals("/"))
+					result1 = Double.parseDouble(prvNum) / result1;
+				
+				if (result1 - (int) result1 == 0.0)
+					tf.setText(""+(int) result1);
+				else
+					tf.setText(""+result1);
+				
+				bReset = true;
+				break;
+			}
 		}
 		
 	}
