@@ -226,22 +226,33 @@ public class calculator extends Frame{
 				
 				bReset = true;
 				break;
-			case "=":
-				double result1 = Double.parseDouble(tf.getText());
-				
-				if (prvAction.equals("+"))
-					result1 += Double.parseDouble(prvNum);
-				else if (prvAction.equals("-"))
-					result1 -= Double.parseDouble(prvNum);
-				else if (prvAction.equals("*"))
-					result1 *= Double.parseDouble(prvNum);
-				else if (prvAction.equals("/"))
-					result1 = Double.parseDouble(prvNum) / result1;
+			case "1/x":
+				prvNum = tf.getText();
+				double result1 = 1/ Double.parseDouble(prvNum); 
 				
 				if (result1 - (int) result1 == 0.0)
 					tf.setText(""+(int) result1);
 				else
 					tf.setText(""+result1);
+				
+				bReset = true;
+				break;
+			case "=":
+				double result11 = Double.parseDouble(tf.getText());
+				
+				if (prvAction.equals("+"))
+					result11 += Double.parseDouble(prvNum);
+				else if (prvAction.equals("-"))
+					result11 -= Double.parseDouble(prvNum);
+				else if (prvAction.equals("*"))
+					result11 *= Double.parseDouble(prvNum);
+				else if (prvAction.equals("/"))
+					result11 = Double.parseDouble(prvNum) / result11;
+				
+				if (result11 - (int) result11 == 0.0)
+					tf.setText(""+(int) result11);
+				else
+					tf.setText(""+result11);
 				
 				bReset = true;
 				break;
